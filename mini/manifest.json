@@ -1,0 +1,75 @@
+{
+  "manifest_version": 3,
+  "name": "小红书采集助手(Mini)",
+  "version": "1.0.0",
+  "description": "轻量级小红书数据采集工具，支持笔记、用户、评论数据采集与导出",
+  "permissions": [
+    "sidePanel",
+    "storage",
+    "scripting",
+    "downloads",
+    "declarativeNetRequestWithHostAccess",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "*://www.xiaohongshu.com/*",
+    "*://pgy.xiaohongshu.com/*",
+    "*://ci.xiaohongshu.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.xiaohongshu.com/*",
+        "*://pgy.xiaohongshu.com/*"
+      ],
+      "js": ["content-scripts/content.js"],
+      "css": ["content-scripts/content.css"],
+      "run_at": "document_start",
+      "world": "ISOLATED"
+    },
+    {
+      "matches": [
+        "*://www.xiaohongshu.com/*",
+        "*://pgy.xiaohongshu.com/*"
+      ],
+      "js": ["content-scripts/inject.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["xiaohongshu/vendor-dynamic.js"],
+      "matches": ["*://www.xiaohongshu.com/*"]
+    }
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "xiaohongshu_rules",
+        "enabled": true,
+        "path": "xiaohongshu/rule.json"
+      }
+    ]
+  },
+  "action": {
+    "default_title": "打开小红书采集助手",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

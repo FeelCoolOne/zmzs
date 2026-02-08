@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小红书采集助手</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <!-- 头部 -->
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">📕</span>
+      <h1>小红书采集助手</h1>
+    </div>
+    <div class="stats">
+      <div class="stat-item">
+        <span class="stat-value" id="stat-total">0</span>
+        <span class="stat-label">已采集</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" id="stat-notes">0</span>
+        <span class="stat-label">笔记</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" id="stat-users">0</span>
+        <span class="stat-label">用户</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 工具栏 -->
+  <div class="toolbar">
+    <div class="filter-group">
+      <select id="filter-type" class="select">
+        <option value="all">全部类型</option>
+        <option value="note_info">笔记</option>
+        <option value="note_list">笔记列表</option>
+        <option value="user_info">用户</option>
+        <option value="comment_info">评论</option>
+        <option value="search_result">搜索</option>
+        <option value="related_notes">相关推荐</option>
+        <option value="follows_list">关注列表</option>
+        <option value="fans_list">粉丝列表</option>
+        <option value="liked_notes">点赞笔记</option>
+        <option value="collected_notes">收藏笔记</option>
+        <option value="home_feed">首页推荐</option>
+        <option value="explore">发现页</option>
+        <option value="tag_notes">标签笔记</option>
+        <option value="notifications">消息通知</option>
+        <option value="shop_items">商品</option>
+        <option value="live_info">直播间</option>
+      </select>
+      <input type="text" id="filter-search" class="input" placeholder="搜索标题/作者...">
+    </div>
+    <div class="action-group">
+      <button id="btn-refresh" class="btn btn-icon" title="刷新">🔄</button>
+      <button id="btn-feishu" class="btn btn-feishu" title="飞书配置">🚀</button>
+      <button id="btn-export-json" class="btn">导出 JSON</button>
+      <button id="btn-export-csv" class="btn">导出 CSV</button>
+      <button id="btn-clear" class="btn btn-danger">清空</button>
+    </div>
+  </div>
+
+  <!-- 数据列表 -->
+  <div class="content">
+    <div id="data-list" class="data-list">
+      <div class="empty-state">
+        <div class="empty-icon">📭</div>
+        <p>暂无采集数据</p>
+        <p class="empty-hint">访问小红书页面开始采集</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <footer class="footer">
+    <span id="status-text">就绪</span>
+    <span id="version">v1.0.0</span>
+  </footer>
+
+  <!-- 详情弹窗 -->
+  <div id="detail-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>数据详情</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <pre id="detail-content"></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- 飞书配置弹窗 -->
+  <div id="feishu-modal" class="modal">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h3>🚀 飞书多维表格配置</h3>
+        <button class="modal-close" id="feishu-modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>App ID (应用ID)</label>
+          <input type="text" id="feishu-app-id" class="input" placeholder="cli_xxxxxxxxxxxx">
+        </div>
+        <div class="form-group">
+          <label>App Secret (应用密钥)</label>
+          <input type="password" id="feishu-app-secret" class="input" placeholder="请输入应用密钥">
+        </div>
+        <div class="form-group">
+          <label>多维表格 Token (App Token)</label>
+          <input type="text" id="feishu-app-token" class="input" placeholder="Bascnxxxxxxxxxxxxxxxx">
+          <small class="form-hint">从飞书多维表格URL中获取，如: https://feishu.cn/base/Bascnxxx</small>
+        </div>
+        <div class="form-group">
+          <label>表格 ID (Table ID)</label>
+          <input type="text" id="feishu-table-id" class="input" placeholder="tblxxxxxxxx">
+          <small class="form-hint">从飞书多维表格URL中获取，如: https://feishu.cn/base/xxx?table=tblxxx</small>
+        </div>
+        <div class="form-tips">
+          <p>💡 获取方式：</p>
+          <ol>
+            <li>打开飞书多维表格</li>
+            <li>点击右上角「...」→「添加文档应用」</li>
+            <li>创建或选择自建应用</li>
+            <li>复制 App ID 和 App Secret</li>
+            <li>从URL中复制 Token 和 Table ID</li>
+          </ol>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-feishu-test" class="btn">测试连接</button>
+        <button id="btn-feishu-save" class="btn btn-primary">保存配置</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>

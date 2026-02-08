@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>社媒助手 - 离线版</title>
+  <link rel="stylesheet" href="styles/sidepanel.css">
+</head>
+<body>
+  <div class="sidepanel-container">
+    <header class="sidepanel-header">
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="17 8 12 3 7 8"></polyline>
+          <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+        <h1>社媒助手</h1>
+      </div>
+      <div class="header-actions">
+        <button id="refreshBtn" class="icon-btn" title="刷新">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M23 4v6h-6"></path>
+            <path d="M1 20v-6h6"></path>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+        </button>
+        <button id="testBtn" class="icon-btn" title="运行测试">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-10 10"></path>
+            <polyline points="22 4 12 14.01 9 11"></polyline>
+          </svg>
+        </button>
+        <button id="settingsBtn" class="icon-btn" title="设置">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="sidepanel-content">
+      <section class="stats-section">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon" style="background: #ff6b6b;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value" id="collectedCount">0</div>
+              <div class="stat-label">已采集</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: #4ecdc4;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value" id="mediaCount">0</div>
+              <div class="stat-label">媒体文件</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: #45b7d1;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value" id="downloadCount">0</div>
+              <div class="stat-label">已下载</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: #96ceb4;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value" id="exportCount">0</div>
+              <div class="stat-label">已导出</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="platform-section">
+        <h2 class="section-title">支持平台</h2>
+        <div class="platform-list">
+          <div class="platform-item" data-platform="xiaohongshu">
+            <img src="assets/xiaohongshu.svg" class="platform-icon" alt="小红书">
+            <span class="platform-name">小红书</span>
+            <span class="platform-status">支持</span>
+          </div>
+          <div class="platform-item" data-platform="douyin">
+            <img src="assets/douyin.svg" class="platform-icon" alt="抖音">
+            <span class="platform-name">抖音</span>
+            <span class="platform-status">支持</span>
+          </div>
+          <div class="platform-item" data-platform="kuaishou">
+            <img src="assets/kuaishou.svg" class="platform-icon" alt="快手">
+            <span class="platform-name">快手</span>
+            <span class="platform-status">支持</span>
+          </div>
+          <div class="platform-item" data-platform="tiktok">
+            <img src="assets/tiktok.svg" class="platform-icon" alt="TikTok">
+            <span class="platform-name">TikTok</span>
+            <span class="platform-status">支持</span>
+          </div>
+          <div class="platform-item" data-platform="xingtu">
+            <img src="assets/xingtu.svg" class="platform-icon" alt="星图">
+            <span class="platform-name">星图</span>
+            <span class="platform-status">支持</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="actions-section">
+        <h2 class="section-title">快捷操作</h2>
+        <div class="action-buttons">
+          <button id="collectBtn" class="action-btn primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            采集当前页面
+          </button>
+          <button id="exportBtn" class="action-btn secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            导出数据
+          </button>
+          <button id="clearBtn" class="action-btn danger">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+            清空数据
+          </button>
+        </div>
+      </section>
+
+      <section class="recent-section">
+        <h2 class="section-title">最近采集</h2>
+        <div id="recentItems" class="recent-list">
+          <div class="empty-state">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <p>暂无采集数据</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="sidepanel-footer">
+      <div class="footer-info">
+        <span class="version">v1.0.0</span>
+        <span class="separator">|</span>
+        <span class="status">离线版</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="lib/indexeddb.js"></script>
+  <script src="scripts/sidepanel.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "社媒助手-离线版",
+  "version": "1.0.0",
+  "description": "社媒助手离线版 - 社交媒体数据采集工具",
+  "author": "Offline Team",
+  "license": "MIT",
+  "scripts": {
+    "build": "echo 'Build complete'",
+    "test": "echo 'Tests complete'"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

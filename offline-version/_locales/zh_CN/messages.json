@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "社媒助手 - 离线版",
+    "description": "扩展名称"
+  },
+  "extDescription": {
+    "message": "社交媒体数据采集工具 - 完全离线版本，支持本地存储和导出",
+    "description": "扩展描述"
+  }
+}

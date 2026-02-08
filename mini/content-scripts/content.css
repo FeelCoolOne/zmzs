@@ -1,0 +1,13 @@
+/* content.css - 内容脚本样式 */
+
+/* 悬浮按钮样式已经在 content.js 中通过 JS 注入 */
+/* 这里可以添加其他内容脚本相关的样式 */
+
+/* 确保悬浮按钮不被页面样式覆盖 */
+#xhs-collector-float {
+  all: initial !important;
+}
+
+#xhs-collector-float * {
+  all: unset !important;
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "extensionPath": "/xiaohongshu/vendor-dynamic.js"
+      }
+    },
+    "condition": {
+      "urlFilter": "vendor-dynamic.*.js",
+      "requestDomains": ["www.xiaohongshu.com", "pgy.xiaohongshu.com"]
+    }
+  }
+]

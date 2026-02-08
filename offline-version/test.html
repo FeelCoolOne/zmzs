@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>社媒助手 - 测试页面</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 600px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+      font-size: 28px;
+    }
+
+    .test-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+
+    .test-item.success {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .test-item.error {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .test-item.pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .test-label {
+      font-weight: 500;
+    }
+
+    .test-status {
+      font-size: 14px;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .test-status.success {
+      background: #28a745;
+      color: white;
+    }
+
+    .test-status.error {
+      background: #dc3545;
+      color: white;
+    }
+
+    .test-status.pending {
+      background: #ffc107;
+      color: #333;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    button {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    button.primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    button.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    button.secondary {
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    button.secondary:hover {
+      background: #e0e0e0;
+    }
+
+    .info {
+      background: #e7f3ff;
+      border-left: 4px solid #1890ff;
+      padding: 16px;
+      margin-top: 20px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #0052cc;
+      line-height: 1.6;
+    }
+
+    .console-output {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 16px;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .console-output::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .console-output::-webkit-scrollbar-track {
+      background: #2d2d2d;
+    }
+
+    .console-output::-webkit-scrollbar-thumb {
+      background: #555;
+      border-radius: 4px;
+    }
+
+    .console-output::-webkit-scrollbar-thumb:hover {
+      background: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>社媒助手 - 功能测试</h1>
+
+    <div id="testResults">
+      <div class="test-item pending" id="test1">
+        <span class="test-label">1. 检测扩展是否加载</span>
+        <span class="test-status pending">待测试</span>
+      </div>
+      <div class="test-item pending" id="test2">
+        <span class="test-label">2. 检测 IndexedDB 是否可用</span>
+        <span class="test-status pending">待测试</span>
+      </div>
+      <div class="test-item pending" id="test3">
+        <span class="test-label">3. 检测后台服务是否运行</span>
+        <span class="test-status pending">待测试</span>
+      </div>
+      <div class="test-item pending" id="test4">
+        <span class="test-label">4. 检测侧边栏是否可用</span>
+        <span class="test-status pending">待测试</span>
+      </div>
+      <div class="test-item pending" id="test5">
+        <span class="test-label">5. 检测内容脚本是否注入</span>
+        <span class="test-status pending">待测试</span>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button class="primary" onclick="runTests()">运行测试</button>
+      <button class="secondary" onclick="clearResults()">清除结果</button>
+    </div>
+
+    <div class="info">
+      <strong>测试说明：</strong><br>
+      1. <strong>重要：</strong>此测试页面需要在扩展环境中运行才能完整测试<br>
+      2. 将此文件添加到扩展的 web_accessible_resources 中，或直接在扩展的侧边栏中打开<br>
+      3. 绿色表示通过，红色表示失败，黄色表示待测试<br>
+      4. 控制台输出会显示在下方<br><br>
+      <strong>完整测试步骤：</strong><br>
+      1. 在 chrome://extensions/ 中重新加载扩展<br>
+      2. 访问支持的平台（如小红书）<br>
+      3. 打开浏览器控制台查看内容脚本是否注入<br>
+      4. 打开侧边栏查看统计数据<br>
+      5. 点击侧边栏的"设置"按钮打开设置页面
+    </div>
+
+    <div class="console-output" id="consoleOutput">
+      <div>> 等待测试...</div>
+    </div>
+  </div>
+
+  <script>
+    function log(message) {
+      const output = document.getElementById('consoleOutput');
+      const timestamp = new Date().toLocaleTimeString();
+      output.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+      output.scrollTop = output.scrollHeight;
+      console.log(message);
+    }
+
+    function updateTestResult(testId, status, message) {
+      const testItem = document.getElementById(testId);
+      const statusSpan = testItem.querySelector('.test-status');
+
+      testItem.className = `test-item ${status}`;
+      statusSpan.className = `test-status ${status}`;
+      statusSpan.textContent = message;
+
+      log(`测试 ${testId}: ${message}`);
+    }
+
+    async function runTests() {
+      log('开始运行测试...');
+      clearResults();
+
+      await test1();
+      await test2();
+      await test3();
+      await test4();
+      await test5();
+
+      log('所有测试完成！');
+    }
+
+    async function test1() {
+      try {
+        if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.id) {
+          updateTestResult('test1', 'success', '扩展已加载');
+        } else if (typeof chrome !== 'undefined' && chrome.runtime) {
+          updateTestResult('test1', 'error', '扩展 API 不可用（不在扩展环境中）');
+        } else {
+          updateTestResult('test1', 'error', 'Chrome API 不可用（请确保在扩展环境中运行）');
+        }
+      } catch (error) {
+        updateTestResult('test1', 'error', `错误: ${error.message}`);
+      }
+    }
+
+    async function test2() {
+      try {
+        const request = indexedDB.open('SocialMediaAssistant', 1);
+        request.onsuccess = () => {
+          updateTestResult('test2', 'success', 'IndexedDB 可用');
+          request.result.close();
+        };
+        request.onerror = () => {
+          updateTestResult('test2', 'error', 'IndexedDB 不可用');
+        };
+      } catch (error) {
+        updateTestResult('test2', 'error', `错误: ${error.message}`);
+      }
+    }
+
+    async function test3() {
+      try {
+        if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.id) {
+          const response = await chrome.runtime.sendMessage({ type: 'getStatistics' });
+          if (response && response.success) {
+            updateTestResult('test3', 'success', '后台服务运行正常');
+          } else {
+            updateTestResult('test3', 'error', '后台服务无响应');
+          }
+        } else {
+          updateTestResult('test3', 'pending', '不在扩展环境中，无法测试');
+        }
+      } catch (error) {
+        updateTestResult('test3', 'error', `错误: ${error.message}`);
+      }
+    }
+
+    async function test4() {
+      try {
+        if (chrome.sidePanel) {
+          updateTestResult('test4', 'success', '侧边栏功能可用');
+        } else {
+          updateTestResult('test4', 'error', '侧边栏功能不可用');
+        }
+      } catch (error) {
+        updateTestResult('test4', 'error', `错误: ${error.message}`);
+      }
+    }
+
+    async function test5() {
+      try {
+        if (window.location.href.includes('xiaohongshu.com') ||
+            window.location.href.includes('douyin.com') ||
+            window.location.href.includes('kuaishou.com') ||
+            window.location.href.includes('tiktok.com') ||
+            window.location.href.includes('xingtu.cn')) {
+          updateTestResult('test5', 'success', '内容脚本已注入');
+        } else {
+          updateTestResult('test5', 'pending', '不在支持的平台');
+        }
+      } catch (error) {
+        updateTestResult('test5', 'error', `错误: ${error.message}`);
+      }
+    }
+
+    function clearResults() {
+      const tests = document.querySelectorAll('.test-item');
+      tests.forEach(test => {
+        test.className = 'test-item pending';
+        const statusSpan = test.querySelector('.test-status');
+        statusSpan.className = 'test-status pending';
+        statusSpan.textContent = '待测试';
+      });
+
+      document.getElementById('consoleOutput').innerHTML = '<div>> 等待测试...</div>';
+    }
+
+    log('测试页面已加载');
+    log('点击"运行测试"按钮开始测试');
+  </script>
+</body>
+</html>

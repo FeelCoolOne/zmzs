@@ -1,0 +1,107 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extName__",
+  "version": "1.0.0",
+  "description": "__MSG_extDescription__",
+  "default_locale": "zh_CN",
+  "icons": {
+    "16": "icon/icon16.png",
+    "32": "icon/icon32.png",
+    "48": "icon/icon48.png",
+    "128": "icon/icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "downloads",
+    "storage",
+    "scripting",
+    "cookies",
+    "alarms",
+    "sidePanel",
+    "declarativeNetRequestWithHostAccess"
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "xiaohongshu",
+        "enabled": true,
+        "path": "xiaohongshu/rule.json"
+      }
+    ]
+  },
+  "host_permissions": [
+    "*://*.xiaohongshu.com/*",
+    "*://*.douyin.com/*",
+    "*://*.kuaishou.com/*",
+    "*://*.tiktok.com/*",
+    "*://*.xingtu.cn/*",
+    "*://*.pgy.xiaohongshu.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_title": "打开社媒助手"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.xiaohongshu.com/*",
+        "*://*.douyin.com/*",
+        "*://*.kuaishou.com/*",
+        "*://*.tiktok.com/*",
+        "*://*.xingtu.cn/*",
+        "*://*.pgy.xiaohongshu.com/*"
+      ],
+      "js": ["content-scripts/content.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.xiaohongshu.com/*",
+        "*://*.douyin.com/*",
+        "*://*.kuaishou.com/*",
+        "*://*.tiktok.com/*",
+        "*://*.xingtu.cn/*",
+        "*://*.pgy.xiaohongshu.com/*"
+      ],
+      "js": ["content-scripts/main.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "xiaohongshu/vendor-dynamic.js",
+        "content-scripts/inject-xiaohongshu.js",
+        "content-scripts/inject-douyin.js",
+        "content-scripts/inject-kuaishou.js",
+        "content-scripts/inject-tiktok.js",
+        "content-scripts/inject-ui.js"
+      ],
+      "matches": [
+        "*://*.xiaohongshu.com/*",
+        "*://*.douyin.com/*",
+        "*://*.kuaishou.com/*",
+        "*://*.tiktok.com/*",
+        "*://*.xingtu.cn/*",
+        "*://*.pgy.xiaohongshu.com/*"
+      ]
+    }
+  ],
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+C"
+      }
+    }
+  }
+}
